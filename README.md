@@ -31,7 +31,7 @@ SELECT
     COUNT(CITY) - COUNT(DISTINCT CITY) AS difference
 FROM STATION;
 ```
-![image](https://github.com/user-attachments/assets/b7b0cd46-80ab-46e6-bc96-d8512b0c59a2)
+![image](https://github.com/user-attachments/assets/4cbf60ff-7ee8-4bab-8823-eea13d0e33bd)
 ![image](https://github.com/user-attachments/assets/24c92498-afda-47d3-89c1-642d513704fb)
 
 
