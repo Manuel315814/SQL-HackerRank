@@ -80,8 +80,44 @@ WHERE LOWER(LEFT(CITY, 1)) IN ('a', 'e', 'i', 'o', 'u')
 - ** EJERCICIO Weather Observation Station 9  **
 ```
 solucion:
-
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY NOT REGEXP '^[AEIOUaeiou]';
 ```
+![image](https://github.com/user-attachments/assets/4ca7870c-6da1-4dec-a751-c1188ef7cd0a)
+
+- ** EJERCICIO Weather Observation Station 10  **
+```
+solucion:
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY NOT REGEXP '[AEIOUaeiou]$';
+```
+![image](https://github.com/user-attachments/assets/5e5cd946-9499-45c8-8fc6-74ca5798beb2)
+
+- ** EJERCICIO Weather Observation Station 11  **
+```
+solucion:
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY NOT LIKE 'A%'
+  AND CITY NOT LIKE 'E%'
+  AND CITY NOT LIKE 'I%'
+  AND CITY NOT LIKE 'O%'
+  AND CITY NOT LIKE 'U%'
+
+UNION
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY NOT LIKE '%A'
+  AND CITY NOT LIKE '%E'
+  AND CITY NOT LIKE '%I'
+  AND CITY NOT LIKE '%O'
+  AND CITY NOT LIKE '%U';
+```
+![image](https://github.com/user-attachments/assets/da5788e0-771c-4aed-bee4-02b7231eaaa6)
+
 - ** EJERCICIO Weather Observation Station 13  **
 ```
 solucion:
