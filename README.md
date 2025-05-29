@@ -82,7 +82,16 @@ WHERE LOWER(LEFT(CITY, 1)) IN ('a', 'e', 'i', 'o', 'u')
 solucion:
 SELECT DISTINCT CITY
 FROM STATION
-WHERE CITY NOT REGEXP '^[AEIOUaeiou]';
+WHERE CITY NOT LIKE 'A%'
+  AND CITY NOT LIKE 'E%'
+  AND CITY NOT LIKE 'I%'
+  AND CITY NOT LIKE 'O%'
+  AND CITY NOT LIKE 'U%'
+  AND CITY NOT LIKE 'a%'
+  AND CITY NOT LIKE 'e%'
+  AND CITY NOT LIKE 'i%'
+  AND CITY NOT LIKE 'o%'
+  AND CITY NOT LIKE 'u%';
 ```
 ![image](https://github.com/user-attachments/assets/4ca7870c-6da1-4dec-a751-c1188ef7cd0a)
 
@@ -91,7 +100,16 @@ WHERE CITY NOT REGEXP '^[AEIOUaeiou]';
 solucion:
 SELECT DISTINCT CITY
 FROM STATION
-WHERE CITY NOT REGEXP '[AEIOUaeiou]$';
+WHERE CITY NOT LIKE '%A'
+  AND CITY NOT LIKE '%E'
+  AND CITY NOT LIKE '%I'
+  AND CITY NOT LIKE '%O'
+  AND CITY NOT LIKE '%U'
+  AND CITY NOT LIKE '%a'
+  AND CITY NOT LIKE '%e'
+  AND CITY NOT LIKE '%i'
+  AND CITY NOT LIKE '%o'
+  AND CITY NOT LIKE '%u';
 ```
 ![image](https://github.com/user-attachments/assets/5e5cd946-9499-45c8-8fc6-74ca5798beb2)
 
@@ -117,6 +135,16 @@ WHERE CITY NOT LIKE '%A'
   AND CITY NOT LIKE '%U';
 ```
 ![image](https://github.com/user-attachments/assets/da5788e0-771c-4aed-bee4-02b7231eaaa6)
+
+- ** EJERCICIO Weather Observation Station 12  **
+```
+solucion:
+SELECT DISTINCT CITY
+FROM STATION
+WHERE LOWER(LEFT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u')
+  AND LOWER(RIGHT(CITY, 1)) NOT IN ('a', 'e', 'i', 'o', 'u');
+```
+![image](https://github.com/user-attachments/assets/ad861278-452e-42d1-8334-7dc5466d1eb5)
 
 - ** EJERCICIO Weather Observation Station 13  **
 ```
