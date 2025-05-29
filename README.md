@@ -56,8 +56,13 @@ UNION ALL
 - ** EJERCICIO Weather Observation Station 6  **
 ```
 solucion:
-
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY LIKE 'A%' OR CITY LIKE 'E%' OR CITY LIKE 'I%' OR CITY LIKE 'O%' OR CITY LIKE 'U%'
+   OR CITY LIKE 'a%' OR CITY LIKE 'e%' OR CITY LIKE 'i%' OR CITY LIKE 'o%' OR CITY LIKE 'u%';
 ```
+![image](https://github.com/user-attachments/assets/aac9740b-5c8e-4094-8bdd-0ec5959b4786)
+
 - ** EJERCICIO Weather Observation Station 7  **
 ```
 solucion:
