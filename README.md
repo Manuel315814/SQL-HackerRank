@@ -192,3 +192,41 @@ FROM STATION
 WHERE LAT_N = (SELECT MIN(LAT_N) FROM STATION WHERE LAT_N>38.7780);
 ```
 ![image](https://github.com/user-attachments/assets/c818f919-5f99-4c72-a0b1-09d32808fb79)
+
+- ** EJERCICIO Weather Observation Station 18  **
+```
+solucion:
+SELECT ROUND(
+    (SELECT MAX(LAT_N) - MIN(LAT_N) FROM STATION) +
+    (SELECT MAX(LONG_W) - MIN(LONG_W) FROM STATION),
+    4
+) AS MANHATTAN_DISTANCE;
+```
+![image](https://github.com/user-attachments/assets/37f576cc-7787-4af0-a11a-622d006e0eb2)
+
+- ** EJERCICIO Weather Observation Station 19  **
+```
+solucion:
+SELECT ROUND(
+    SQRT(POWER(MAX(LAT_N) - MIN(LAT_N), 2) + 
+    POWER(MAX(LONG_W) - MIN(LONG_W), 2)),
+    4
+) AS EUCLIDEAN_DISTANCE
+FROM STATION;
+```
+![image](https://github.com/user-attachments/assets/314c3808-f0cb-4e58-85fa-8f02f518786b)
+
+- ** EJERCICIO Weather Observation Station 20 **
+```
+solucion:
+SELECT ROUND(AVG(LAT_N), 4) AS MEDIAN_LAT_N
+FROM (
+    SELECT LAT_N,
+           ROW_NUMBER() OVER (ORDER BY LAT_N) AS rn,
+           COUNT(*) OVER () AS cnt
+    FROM STATION
+) AS ordered_lat
+WHERE rn IN ((cnt + 1) / 2, (cnt + 2) / 2);
+```
+![image](https://github.com/user-attachments/assets/476c67c8-e831-428b-8dce-8acf8e6e70d2)
+
