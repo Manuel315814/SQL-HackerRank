@@ -221,17 +221,197 @@ FROM STATION;
 ```
 ![image](https://github.com/user-attachments/assets/314c3808-f0cb-4e58-85fa-8f02f518786b)
 
-- ** EJERCICIO Weather Observation Station 20 **
+- ** EJERCICIO Revising the Select Query I **
 ```
 solucion:
-SELECT ROUND(AVG(LAT_N), 4) AS MEDIAN_LAT_N
-FROM (
-    SELECT LAT_N,
-           ROW_NUMBER() OVER (ORDER BY LAT_N) AS rn,
-           COUNT(*) OVER () AS cnt
-    FROM STATION
-) AS ordered_lat
-WHERE rn IN ((cnt + 1) / 2, (cnt + 2) / 2);
+SELECT *
+FROM CITY
+WHERE COUNTRYCODE ='USA' AND POPULATION > 100000;
 ```
-![image](https://github.com/user-attachments/assets/476c67c8-e831-428b-8dce-8acf8e6e70d2)
+![image](https://github.com/user-attachments/assets/e9c11901-1a11-41af-8a1d-0dd2863b201a)
 
+- ** EJERCICIO Revising the Select Query II **
+```
+solucion:
+SELECT NAME
+FROM CITY 
+WHERE COUNTRYCODE = 'USA' AND POPULATION > 120000;
+```
+![image](https://github.com/user-attachments/assets/07be6213-18e8-4f6e-95b7-d5a9f8c03996)
+
+- ** EJERCICIO Select By ID **
+```
+solucion:
+SELECT *
+FROM CITY 
+WHERE ID = 1661;
+```
+![image](https://github.com/user-attachments/assets/edf4719a-4427-4096-bd53-2cca0dcfa4c2)
+
+- ** EJERCICIO Japanese Cities' Atributes **
+```
+solucion:
+SELECT * 
+FROM CITY
+WHERE COUNTRYCODE = 'JPN';
+```
+![image](https://github.com/user-attachments/assets/7cfc0249-7e94-4c90-b7fa-be2dc1d52c6a)
+
+- ** EJERCICIO Japanese Cities' Name **
+```
+solucion:
+SELECT NAME 
+FROM CITY 
+WHERE COUNTRYCODE = 'JPN';
+```
+![image](https://github.com/user-attachments/assets/55475cb2-afa5-470c-8828-784b61cc904c)
+
+- ** EJERCICIO Higther Than 75 Marks **
+```
+solucion:
+SELECT NAME 
+FROM STUDENTS 
+WHERE MARKS > 75 
+ORDER BY RIGHT(NAME, 3), ID ASC;
+```
+![image](https://github.com/user-attachments/assets/deed3a0f-6f45-4faa-aebb-ce1174141211)
+
+- ** EJERCICIO Employee Names **
+```
+solucion:
+SELECT NAME
+FROM EMPLOYEE
+ORDER BY NAME;
+```
+![image](https://github.com/user-attachments/assets/7ddc622e-cb86-4a2c-9482-c546a1aa0781)
+
+- ** EJERCICIO Employee Salaries **
+```
+solucion:
+SELECT NAME
+FROM EMPLOYEE 
+WHERE SALARY > 2000 AND MONTHS < 10
+ORDER BY EMPLOYEE_ID;
+```
+![image](https://github.com/user-attachments/assets/e8bcb1c6-5e76-4e1e-9c01-290856d786c4)
+
+- ** EJERCICIO Type of Triangle **
+```
+solucion:
+SELECT CASE 
+WHEN A + B <= C OR A + C <= B OR B + C <= A THEN 'Not A Triangle' 
+WHEN A = B AND B = C THEN 'Equilateral' 
+WHEN A = B OR B = C OR A = C THEN 'Isosceles' 
+ELSE 'Scalene' 
+END 
+FROM TRIANGLES;
+```
+![image](https://github.com/user-attachments/assets/a55afd3b-4e22-4fdd-8a52-c2e82a026fdf)
+
+- ** EJERCICIO The PADS **
+```
+solucion:
+SELECT CONCAT(NAME,'(',SUBSTR(OCCUPATION,1,1),')') AS N
+FROM OCCUPATIONS
+ORDER BY N;
+SELECT CONCAT('There are a total of ',COUNT(OCCUPATION),' ',LOWER(OCCUPATION),'s.')
+FROM OCCUPATIONS
+GROUP BY OCCUPATION
+ORDER BY COUNT(OCCUPATION), OCCUPATION;
+```
+![image](https://github.com/user-attachments/assets/1c18c845-9961-4300-9fff-aef1ffd62f68)
+
+- ** EJERCICIO Binary Tree Nodes  **
+```
+solucion:
+SELECT N, CASE WHEN P IS NULL THEN 'Root' 
+WHEN(SELECT COUNT(*) FROM BST WHERE P = A.N) > 0 THEN 'Inner'
+ELSE 'Leaf'
+END
+FROM BST A
+ORDER BY N;
+```
+![image](https://github.com/user-attachments/assets/a77843b5-d132-478e-8efd-f602d9739628)
+
+- ** EJERCICIO New Companies  **
+```
+solucion:
+SELECT COMPANY_CODE, FOUNDER,
+(SELECT COUNT(DISTINCT LEAD_MANAGER_CODE) FROM LEAD_MANAGER WHERE COMPANY_CODE = C.COMPANY_CODE),
+(SELECT COUNT(DISTINCT SENIOR_MANAGER_CODE) FROM SENIOR_MANAGER WHERE COMPANY_CODE = C.COMPANY_CODE),
+(SELECT COUNT(DISTINCT MANAGER_CODE) FROM MANAGER WHERE COMPANY_CODE = C.COMPANY_CODE),
+(SELECT COUNT(DISTINCT EMPLOYEE_CODE) FROM EMPLOYEE WHERE COMPANY_CODE = C.COMPANY_CODE)
+FROM COMPANY C
+ORDER BY COMPANY_CODE;
+```
+![image](https://github.com/user-attachments/assets/d2a73806-395c-42fc-8e88-60886c9ef8ac)
+
+- ** EJERCICIO Revising Aggregations  **
+```
+solucion:
+SELECT COUNT(POPULATION)
+FROM CITY
+WHERE POPULATION > 100000;
+```
+![image](https://github.com/user-attachments/assets/091b135e-7577-4f3d-b444-f61932feb813)
+
+- ** EJERCICIO Revising Aggregations The count function  **
+```
+solucion:
+SELECT COUNT(POPULATION)
+FROM CITY
+WHERE POPULATION > 100000;
+```
+![image](https://github.com/user-attachments/assets/1f54c7f4-871f-4230-a73e-f1cd91ace545)
+
+- ** EJERCICIO Revising Aggregations The sum function  **
+```
+solucion:
+SELECT SUM(POPULATION)
+FROM CITY
+WHERE DISTRICT = 'California';
+```
+![image](https://github.com/user-attachments/assets/dd17014e-1922-473b-895d-63da60a15299)
+
+- ** EJERCICIO Average Population **
+```
+solucion:
+SELECT FLOOR(AVG(POPULATION))
+FROM CITY;
+```
+![image](https://github.com/user-attachments/assets/afbea8b6-0d9a-4f0f-99bd-3e77e25f7cac)
+
+- ** EJERCICIO Japan Population **
+```
+solucion:
+SELECT SUM(POPULATION)
+FROM CITY
+WHERE COUNTRYCODE = 'JPN';
+```
+![image](https://github.com/user-attachments/assets/d9d4f882-b817-4697-950a-47cae9c30bc3)
+
+- ** EJERCICIO Population Density Difference **
+```
+solucion:
+SELECT MAX(POPULATION)-MIN(POPULATION)
+FROM CITY;
+```
+![image](https://github.com/user-attachments/assets/c5a37cdb-4a6c-4aa6-a7ec-2fe323b6bb01)
+
+- ** EJERCICIO The Blunder **
+```
+solucion:
+SELECT CEIL(AVG(Salary)-AVG(REPLACE(Salary,'0',''))) 
+FROM EMPLOYEES;
+```
+![image](https://github.com/user-attachments/assets/8b73d790-6464-41f0-941d-37e003bb5ce3)
+
+- ** EJERCICIO The Earners **
+```
+solucion:
+SELECT MAX(SALARY*MONTHS), COUNT(*)
+FROM EMPLOYEE
+WHERE (SALARY*MONTHS) = (SELECT MAX(SALARY*MONTHS)
+                         FROM EMPLOYEE);
+```
+![image](https://github.com/user-attachments/assets/99b8e76b-0795-422e-86b0-cf9a6f89e391)
